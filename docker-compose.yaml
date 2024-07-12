@@ -5,7 +5,7 @@ services:
     container_name: go-application
     image: go-application
     ports:
-      - "80:5000"
+      - "87:5000"
   python-application:
     build:
       context: ./python-application
@@ -48,9 +48,12 @@ services:
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: "mysql"
-      WORDPRESS_DB_USER: "wp"  
+      WORDPRESS_DB_USER: "wp"
       WORDPRESS_DB_PASSWORD: "Wp123*"
       WORDPRESS_DB_NAME: "wordpress"
+      WORDPRESS_CONFIG_EXTRA: |
+        define('PROMETHEUS_KEY','fg98dfgkj');
+        define('PROMETHEUS_METRICS_FOR_WP_DISABLE_CACHE', 'true');
     ports:
       - 8080:80
     volumes:
@@ -60,10 +63,10 @@ services:
     restart: always
     command: '--default-authentication-plugin=mysql_native_password'
     environment:
-      - MYSQL_ROOT_PASSWORD=Wp123*
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_USER=wp
-      - MYSQL_PASSWORD=Wp123*
+      MYSQL_ROOT_PASSWORD: 'Wp123*'
+      MYSQL_DATABASE: 'wordpress'
+      MYSQL_USER: 'wp'
+      MYSQL_PASSWORD: 'Wp123*'
     volumes:
       - mysql-data:/var/lib/mysql  
 volumes:

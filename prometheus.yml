@@ -10,19 +10,10 @@ scrape_configs:
 
 - job_name: "WordPress metrics"
   static_configs:
-    - targets: ["wordpress:80"]
-  scrape_interval: "5m"
-  metrics_path: "/wp-json/metrics"
+    - targets: ['wordpress:80']
+  metrics_path: '/index.php'
   params:
+    rest_route: ['/metrics']
+    all: ['yes']
     prometheus: ['fg98dfgkj']
-    users: ['yes']
-    posts: ['yes']
-    pages: ['yes']
-    autoload: ['yes']
-    transient: ['yes']
-    user_sessions: ['yes']
-    posts_without_content: ['yes']
-    posts_without_title: ['yes']
-    db_size: ['yes']
-    pending_updates: ['yes']
-  scheme: "https"
+  scheme: "http"
