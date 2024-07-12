@@ -1,0 +1,28 @@
+global:
+  scrape_interval:     5s
+  evaluation_interval: 30s
+scrape_configs:
+- job_name: my-application
+  honor_labels: true
+  static_configs:
+  - targets: ['go-application:5000','python-application:5000','dotnet-application:5000','nodejs-application:5000']
+
+
+- job_name: "WordPress metrics"
+  static_configs:
+    - targets: ["wordpress:80"]
+  scrape_interval: "5m"
+  metrics_path: "/wp-json/metrics"
+  params:
+    prometheus: ['fg98dfgkj']
+    users: ['yes']
+    posts: ['yes']
+    pages: ['yes']
+    autoload: ['yes']
+    transient: ['yes']
+    user_sessions: ['yes']
+    posts_without_content: ['yes']
+    posts_without_title: ['yes']
+    db_size: ['yes']
+    pending_updates: ['yes']
+  scheme: "https"
