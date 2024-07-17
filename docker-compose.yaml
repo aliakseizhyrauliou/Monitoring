@@ -5,7 +5,7 @@ services:
     container_name: go-application
     image: go-application
     ports:
-      - "87:5000"
+      - "4020:5000"
   python-application:
     build:
       context: ./python-application
